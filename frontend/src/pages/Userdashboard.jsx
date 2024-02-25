@@ -7,7 +7,7 @@ import Add from "./Add";
 
 function Userdashboard() {
   const [taskslist, setTasks] = useState([]);
-  const id = useParams();
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,19 +24,13 @@ function Userdashboard() {
   }, []);
 
 
-  const handleDelete = ()=>{
-    axios.delete('http://localhost:8081/'+id)
-    .then(
-        res=>{
-            if(res.data.error === 'Error'){
-                alert('Deletion Failed');
-            }
-
-            alert('Successfully Deleted');
-            navigate('/');
-        }
-    )
-    .catch()
+  const handleDelete = async (id)=>{
+    try{
+        axios.delete('http://localhost:8081/delete/'+id);
+        window.location.reload();
+    } catch(e){
+        console.log(e);
+    }
   }
 
   return (
@@ -61,7 +55,7 @@ function Userdashboard() {
                   
                 </td>
                 <td>
-                  <Link to={`/${todo.id}`} onClick={handleDelete}>Delete</Link>
+                  <Link to={`/delete/${todo.id}`} onClick={e => handleDelete(todo.id)}>Delete</Link>
                 </td>
               </tr>
            

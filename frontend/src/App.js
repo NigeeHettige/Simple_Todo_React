@@ -12,7 +12,7 @@ function App() {
           <Route path='/' element={<Userdashboard/>}/>
           <Route path='/add'  element={<Add/>}/>
           <Route path='/update/:id' element ={<Update/>}/>
-          <Route path='/:id' element ={<Userdashboard/>}/>
+          <Route path='/delete/:id' element ={<Userdashboard/>}/>
          
         </Routes>
       

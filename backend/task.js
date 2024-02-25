@@ -59,16 +59,16 @@ task.put('/update/:id',(req,res)=>{
 
 })
 
-task.delete('/:id',(req,res)=>{
+task.delete('/delete/:id',(req,res)=>{
   try{
     const sql = "DELETE FROM todo WHERE id = ?";
     const id = req.params.id;
-    connection.query(sql,id,(err,data)=>{
+    connection.query(sql,[id],(err,data)=>{
       if(err){
-        console.log(err.message);
-        return res.json({message: "Error"});
+        // console.log(err.message);
+        return res.json("Error");
       }
-      return res.json({message:"Success"});
+      return res.json(data);
     })
   }
   catch(err){
